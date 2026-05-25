@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我们的百日纪念 💕</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+    background: #fff5f5;
+    color: #5c3d3d;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ===== Music Player ===== */
+
+  /* ===== Hero Section ===== */
+  .hero {
+    height: 100vh; display: flex;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, #fff0f0 0%, #ffe8e8 30%, #ffe0e0 60%, #fff0f5 100%);
+    overflow: hidden;
+  }
+
+  /* Decorative puppies floating */
+  .puppy-deco {
+    position: absolute; pointer-events: none;
+    opacity: 0.15; animation: floatPuppy 6s ease-in-out infinite;
+  }
+  .puppy-deco:nth-child(1) { top: 10%; left: 5%; width: 120px; animation-delay: 0s; }
+  .puppy-deco:nth-child(2) { top: 20%; right: 8%; width: 100px; animation-delay: 2s; }
+  .puppy-deco:nth-child(3) { bottom: 15%; left: 10%; width: 90px; animation-delay: 4s; }
+  .puppy-deco:nth-child(4) { bottom: 25%; right: 5%; width: 110px; animation-delay: 1s; }
+  .puppy-deco:nth-child(5) { top: 50%; left: 3%; width: 80px; animation-delay: 3s; }
+  .puppy-deco:nth-child(6) { top: 40%; right: 3%; width: 95px; animation-delay: 5s; }
+
+  @keyframes floatPuppy {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(2deg); }
+    50% { transform: translateY(-5px) rotate(-1deg); }
+    75% { transform: translateY(-20px) rotate(1deg); }
+  }
+
+  .hero-content {
+    text-align: center; z-index: 2; position: relative;
+  }
+  .hero-puppy {
+    width: 180px; margin-bottom: 20px;
+    animation: heroBounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(255,150,150,0.3));
+  }
+  @keyframes heroBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+    background: linear-gradient(135deg, #e87d7d, #f0a0a0, #d46868);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+  }
+  .hero-date {
+    font-size: 1.2rem; color: #c99595; letter-spacing: 6px;
+    animation: fadeInUp 1s ease 0.3s both;
+  }
+  .hero-hearts {
+    font-size: 2rem; margin-top: 15px;
+    animation: fadeInUp 1s ease 0.6s both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Floating Hearts ===== */
+  .floating-hearts {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 999;
+  }
+  .heart-particle {
+    position: absolute; font-size: 20px;
+    animation: heartFloat 4s ease-in forwards;
+    opacity: 0;
+  }
+  @keyframes heartFloat {
+    0% { opacity: 0; transform: translateY(0) scale(0.3) rotate(0deg); }
+    20% { opacity: 0.8; transform: translateY(-30px) scale(1) rotate(10deg); }
+    100% { opacity: 0; transform: translateY(-200px) scale(0) rotate(45deg); }
+  }
+
+  /* ===== Section Styles ===== */
+  .section {
+    min-height: 100vh; padding: 80px 20px;
+    display: flex; flex-direction: column;
+    align-items: center; position: relative;
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-size: 2.5rem; font-weight: 700;
+    text-align: center; margin-bottom: 15px;
+    position: relative; z-index: 2;
+  }
+  .section-subtitle {
+    font-size: 1.1rem; color: #b88080;
+    text-align: center; margin-bottom: 50px;
+    max-width: 500px; line-height: 1.8;
+    position: relative; z-index: 2;
+  }
+
+  /* Section colors */
+  .section-meet { background: linear-gradient(180deg, #fff5f5 0%, #fff0ee 100%); }
+  .section-meet .section-title { color: #e8967a; }
+  .section-know { background: linear-gradient(180deg, #fff0ee 0%, #ffeee8 100%); }
+  .section-know .section-title { color: #e8a87a; }
+  .section-love { background: linear-gradient(180deg, #ffeee8 0%, #ffe8e0 100%); }
+  .section-love .section-title { color: #e87d7d; }
+  .section-forever { background: linear-gradient(180deg, #ffe8e0 0%, #fff0f0 100%); }
+  .section-forever .section-title { color: #d46868; }
+
+  /* Section puppy decor */
+  .section-puppy {
+    position: absolute; opacity: 0.08; pointer-events: none;
+    width: 150px; z-index: 1;
+  }
+  .section-meet .section-puppy { top: 10%; right: 5%; transform: rotate(5deg); }
+  .section-know .section-puppy { top: 15%; left: 3%; transform: rotate(-8deg); }
+  .section-love .section-puppy { bottom: 10%; right: 5%; transform: rotate(3deg); }
+  .section-forever .section-puppy { bottom: 15%; left: 3%; transform: rotate(-3deg); }
+
+  /* ===== Timeline Line ===== */
+  .timeline-line {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(180deg, #ffcdcd, #ffb8b8, #ffa0a0, #ff8888);
+    transform: translateX(-50%); z-index: 0;
+    border-radius: 2px;
+  }
+
+  /* ===== Photo Gallery ===== */
+  .gallery {
+    display: flex; gap: 30px; flex-wrap: wrap;
+    justify-content: center; max-width: 900px;
+    position: relative; z-index: 2;
+  }
+  .photo-card {
+    width: 280px; border-radius: 20px; overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 40px rgba(200,100,100,0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    cursor: pointer;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s;
+  }
+  .photo-card.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .photo-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 60px rgba(200,100,100,0.25);
+  }
+  .photo-card img {
+    width: 100%; height: 320px; object-fit: cover;
+    display: block; transition: transform 0.6s;
+  }
+  .photo-card:hover img {
+    transform: scale(1.08);
+  }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    display: none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%; z-index: 2000;
+    background: rgba(0,0,0,0.9);
+    justify-content: center; align-items: center;
+    flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 85vw; max-height: 75vh;
+    border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .lightbox-close {
+    position: absolute; top: 30px; right: 40px;
+    font-size: 40px; color: white; cursor: pointer;
+    opacity: 0.7; transition: opacity 0.3s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-caption {
+    color: white; font-size: 1.1rem; margin-top: 20px;
+    text-align: center; max-width: 500px;
+  }
+
+  /* ===== Navigation Dots ===== */
+  .nav-dots {
+    position: fixed; right: 25px; top: 50%;
+    transform: translateY(-50%); z-index: 500;
+    display: flex; flex-direction: column; gap: 15px;
+  }
+  .nav-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #e8c4c4; cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .nav-dot:hover, .nav-dot.active {
+    background: #e87d7d; transform: scale(1.4);
+  }
+  .nav-dot .nav-label {
+    position: absolute; right: 22px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px; color: #c99595;
+    white-space: nowrap; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .nav-dot:hover .nav-label { opacity: 1; }
+
+  /* ===== Footer ===== */
+  .footer {
+    height: 50vh; display: flex;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #fff0f0, #ffe8e0);
+    position: relative; overflow: hidden;
+  }
+  .footer-text {
+    font-size: 1.5rem; color: #d46868;
+    text-align: center; line-height: 2;
+    position: relative; z-index: 2;
+  }
+  .footer-hearts {
+    font-size: 3rem; margin-top: 15px;
+    animation: pulse 1.5s ease-in-out infinite;
+    position: relative; z-index: 2;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+  .footer-puppies {
+    position: absolute; bottom: 20px;
+    display: flex; gap: 40px; z-index: 2;
+  }
+  .footer-puppies img {
+    width: 100px; opacity: 0.5;
+    animation: floatPuppy 5s ease-in-out infinite;
+  }
+  .footer-puppies img:nth-child(2) { animation-delay: 2.5s; }
+
+  /* ===== Scroll Animations ===== */
+  .fade-in-section {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in-section.is-visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .gallery { gap: 15px; }
+    .photo-card { width: 160px; }
+    .photo-card img { height: 220px; }
+    .section-title { font-size: 1.8rem; }
+    .nav-dots { right: 10px; gap: 10px; }
+    .nav-dot { width: 10px; height: 10px; }
+    .timeline-line { left: 30px; }
+  }
+
+  /* ===== Cursor Trail ===== */
+  .cursor-heart {
+    position: fixed; pointer-events: none;
+    font-size: 18px; z-index: 3000;
+    animation: cursorPop 0.6s ease-out forwards;
+  }
+  @keyframes cursorPop {
+    0% { opacity: 1; transform: scale(0.5) translateY(0); }
+    100% { opacity: 0; transform: scale(1.2) translateY(-40px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Music Player -->
+<audio id="bgMusic" loop playsinline preload="auto">
+  <source src="music/遇到.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Play button (mobile-friendly) -->
+<button class="play-btn" id="playBtn">
+  <span class="play-icon">🎵</span>
+  <span class="play-text">点击播放音乐</span>
+</button>
+
+<style>
+  .play-btn {
+    position: fixed; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 5000;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    border: none;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(255,140,140,0.4);
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s ease;
+    animation: btnPulse 2s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  .play-btn:active {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: 0 4px 15px rgba(255,140,140,0.3);
+  }
+  .play-btn.playing {
+    animation: none;
+    background: linear-gradient(135deg, #f0c0c0, #e8a0a0);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .play-btn.loading {
+    animation: none;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+  .play-icon {
+    font-size: 24px;
+    display: inline-block;
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(255,140,140,0.4); }
+    50% { box-shadow: 0 8px 45px rgba(255,140,140,0.7); }
+  }
+</style>
+
+<!-- Floating Hearts Container -->
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<!-- Navigation Dots -->
+<nav class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-target="hero"><span class="nav-label">序</span></div>
+  <div class="nav-dot" data-target="meet"><span class="nav-label">相识</span></div>
+  <div class="nav-dot" data-target="know"><span class="nav-label">相知</span></div>
+  <div class="nav-dot" data-target="love"><span class="nav-label">相爱</span></div>
+  <div class="nav-dot" data-target="forever"><span class="nav-label">永远</span></div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <img class="puppy-deco" src="images/theme/20220922161509_bc733.jpeg" alt="">
+  <img class="puppy-deco" src="images/theme/20230328230349_0aebd.jpeg" alt="">
+  <img class="puppy-deco" src="images/theme/9WSXMJwpC8ALqgO.thumb.1000_0.jpg" alt="">
+  <img class="puppy-deco" src="images/theme/GgSBy5DjCdPaxNA.thumb.1000_0.jpeg" alt="">
+  <img class="puppy-deco" src="images/theme/R-C.jfif" alt="">
+  <img class="puppy-deco" src="images/theme/WXSzdNgBUQ3J4mQ.jpeg" alt="">
+
+  <div class="hero-content">
+    <img class="hero-puppy" src="images/theme/WXSzdNgBUQ3J4mQ.jpeg" alt="🐶">
+    <h1 class="hero-title">我们的百日纪念</h1>
+    <p class="hero-date">✧ 相识 100 天 ✧</p>
+    <div class="hero-hearts">💕 🐾 💕</div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div style="position:absolute;bottom:30px;text-align:center;color:#c99595;font-size:14px;animation:bounceDown 2s infinite;">
+    向下滚动，开启我们的故事
+    <div style="font-size:20px;">↓</div>
+  </div>
+  <style>
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+  </style>
+</section>
+
+<!-- ===== 相识 ===== -->
+<section class="section section-meet" id="meet">
+  <div class="timeline-line"></div>
+  <img class="section-puppy" src="images/theme/20220922161509_bc733.jpeg" alt="">
+  <h2 class="section-title fade-in-section">🌸 相识</h2>
+  <p class="section-subtitle fade-in-section">
+    世界很大，人潮拥挤，<br>
+    可那天偏偏让我遇见了你。<br>
+    一眼万年，从此心里有了牵挂。
+  </p>
+  <div class="gallery">
+    <div class="photo-card" data-src="images/photos/相识/46a083ef670111ff1167435d1c891628.jpg">
+      <img src="images/photos/相识/46a083ef670111ff1167435d1c891628.jpg" alt="相识" loading="lazy">
+    </div>
+    <div class="photo-card" data-src="images/photos/相识/7e003264f7f172c95bcaf0e90763148c.jpg">
+      <img src="images/photos/相识/7e003264f7f172c95bcaf0e90763148c.jpg" alt="相识" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== 相知 ===== -->
+<section class="section section-know" id="know">
+  <div class="timeline-line"></div>
+  <img class="section-puppy" src="images/theme/20230328230349_0aebd.jpeg" alt="">
+  <h2 class="section-title fade-in-section">💫 相知</h2>
+  <p class="section-subtitle fade-in-section">
+    一点一点了解你，<br>
+    发现你的小脾气也很可爱，<br>
+    你的笑容，是我每天最期待的事。
+  </p>
+  <div class="gallery">
+    <div class="photo-card" data-src="images/photos/相知/193f69e9b18fbb96dc833e5dd6f9a9ae.jpg">
+      <img src="images/photos/相知/193f69e9b18fbb96dc833e5dd6f9a9ae.jpg" alt="相知" loading="lazy">
+    </div>
+    <div class="photo-card" data-src="images/photos/相知/a5fe25a7f65a0507f201e679bf278a25.jpg">
+      <img src="images/photos/相知/a5fe25a7f65a0507f201e679bf278a25.jpg" alt="相知" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== 相爱 ===== -->
+<section class="section section-love" id="love">
+  <div class="timeline-line"></div>
+  <img class="section-puppy" src="images/theme/GgSBy5DjCdPaxNA.thumb.1000_0.jpeg" alt="">
+  <h2 class="section-title fade-in-section">💗 相爱</h2>
+  <p class="section-subtitle fade-in-section">
+    确认过眼神，你就是对的人。<br>
+    和你在一起的每一天，<br>
+    都像泡在蜜罐里一样甜。
+  </p>
+  <div class="gallery">
+    <div class="photo-card" data-src="images/photos/相爱/01a019803234db3e9126f1c10d65eadf.jpg">
+      <img src="images/photos/相爱/01a019803234db3e9126f1c10d65eadf.jpg" alt="相爱" loading="lazy">
+    </div>
+    <div class="photo-card" data-src="images/photos/相爱/c81dcc843aa26a5bc106330d8a284843.jpg">
+      <img src="images/photos/相爱/c81dcc843aa26a5bc106330d8a284843.jpg" alt="相爱" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== 永远 ===== -->
+<section class="section section-forever" id="forever">
+  <div class="timeline-line"></div>
+  <img class="section-puppy" src="images/theme/R-C.jfif" alt="">
+  <h2 class="section-title fade-in-section">💍 永远</h2>
+  <p class="section-subtitle fade-in-section">
+    牵起你的手，就不想再放开。<br>
+    一百天只是一个开始，<br>
+    未来的每一天，都想和你一起走。
+  </p>
+  <div class="gallery">
+    <div class="photo-card" data-src="images/photos/永远/04f98def1f60a0e60522ebb37fc6b0fe.jpg">
+      <img src="images/photos/永远/04f98def1f60a0e60522ebb37fc6b0fe.jpg" alt="永远" loading="lazy">
+    </div>
+    <div class="photo-card" data-src="images/photos/永远/5d374ad955898b16e4a37afa50cd4ca2.jpg">
+      <img src="images/photos/永远/5d374ad955898b16e4a37afa50cd4ca2.jpg" alt="永远" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<section class="footer">
+  <img class="puppy-deco" src="images/theme/9WSXMJwpC8ALqgO.thumb.1000_0.jpg" alt="">
+  <img class="puppy-deco" src="images/theme/WXSzdNgBUQ3J4mQ.jpeg" alt="">
+  <div class="footer-text">
+    100 天<br>
+    2400 小时<br>
+    144000 分钟<br>
+    <strong>想你的每一秒</strong>
+  </div>
+  <div class="footer-hearts">🐶 💕 🐶</div>
+  <div class="footer-puppies">
+    <img src="images/theme/20220922161509_bc733.jpeg" alt="">
+    <img src="images/theme/20230328230349_0aebd.jpeg" alt="">
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <img src="" alt="" id="lightboxImg">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<script>
+// ===== Music Player - Button Approach (Mobile Safe) =====
+(function() {
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('playBtn');
+  const btnText = btn.querySelector('.play-text');
+  let musicStarted = false;
+
+  // Try desktop autoplay
+  music.play().then(function() {
+    musicStarted = true;
+    btn.classList.add('playing');
+  }).catch(function() {
+    // Autoplay blocked - button stays visible
+  });
+
+  function startMusic(e) {
+    if (musicStarted) return;
+    e.preventDefault();
+
+    // Show loading state
+    btn.classList.add('loading');
+    btnText.textContent = '加载中...';
+
+    // Load audio then play - critical for mobile
+    music.load();
+    var promise = music.play();
+    if (promise !== undefined) {
+      promise.then(function() {
+        musicStarted = true;
+        btn.classList.remove('loading');
+        btn.classList.add('playing');
+      }).catch(function(err) {
+        btn.classList.remove('loading');
+        btnText.textContent = '再点一次试试 💕';
+        setTimeout(function() {
+          if (!musicStarted) btnText.textContent = '点击播放音乐';
+        }, 2000);
+      });
+    }
+  }
+
+  // Button: both touch and click for mobile
+  btn.addEventListener('click', startMusic);
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    startMusic(e);
+  });
+})();
+
+// ===== Floating Hearts =====
+(function() {
+  const container = document.getElementById('floatingHearts');
+  const hearts = ['💕', '💗', '💖', '💘', '💝', '🐾', '✨', '🌸'];
+
+  function createHeart(x, y) {
+    const heart = document.createElement('span');
+    heart.className = 'heart-particle';
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+    heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+    heart.style.animationDuration = (2.5 + Math.random() * 4) + 's';
+    container.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }
+
+  let lastHeartTime = 0;
+  document.addEventListener('mousemove', function(e) {
+    const now = Date.now();
+    if (now - lastHeartTime > 200) {
+      createHeart(e.pageX, e.pageY);
+      lastHeartTime = now;
+    }
+  });
+
+  // Also spawn random hearts
+  setInterval(function() {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    createHeart(x, y);
+  }, 2000);
+})();
+
+// ===== Scroll Animations (Intersection Observer) =====
+(function() {
+  // Fade-in sections
+  const fadeEls = document.querySelectorAll('.fade-in-section');
+  const fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeEls.forEach(function(el) { fadeObserver.observe(el); });
+
+  // Photo cards
+  const cards = document.querySelectorAll('.photo-card');
+  const cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  cards.forEach(function(card) { cardObserver.observe(card); });
+})();
+
+// ===== Navigation Dots =====
+(function() {
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = [];
+
+  dots.forEach(function(dot) {
+    const targetId = dot.getAttribute('data-target');
+    const section = document.getElementById(targetId);
+    if (section) sections.push({ dot: dot, section: section, id: targetId });
+  });
+
+  // Click to scroll
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      const targetId = dot.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Update active dot on scroll
+  const dotObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        dots.forEach(function(d) { d.classList.remove('active'); });
+        const activeDot = document.querySelector('.nav-dot[data-target="' + entry.target.id + '"]');
+        if (activeDot) activeDot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(function(s) { dotObserver.observe(s.section); });
+})();
+
+// ===== Lightbox =====
+(function() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const cards = document.querySelectorAll('.photo-card');
+
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      const src = card.getAttribute('data-src');
+      lightboxImg.src = src;
+      // Get parent section title for caption
+      const section = card.closest('.section');
+      const title = section ? section.querySelector('.section-title').textContent : '';
+      lightboxCaption.textContent = title;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(function() { lightboxImg.src = ''; }, 300);
+  }
+})();
+
+// ===== Parallax on theme puppies =====
+(function() {
+  const decos = document.querySelectorAll('.puppy-deco');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    decos.forEach(function(deco, i) {
+      const speed = 0.03 + (i * 0.01);
+      deco.style.transform = 'translateY(' + (scrolled * speed) + 'px)';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
